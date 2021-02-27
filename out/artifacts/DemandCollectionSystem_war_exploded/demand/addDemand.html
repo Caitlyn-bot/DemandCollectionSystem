@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>需求征集</title>
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+<script src="../bootstrap/js/jquery-3.5.1.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+
+
+
+        $("#addRoleBtn").click(function(){
+            $("#addRoleModal").modal({
+                show:true
+            });
+        })
+
+
+    });
+</script>
+</head>
+<body>
+
+
+<!--导航栏-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重大需求征集系统 <small>V1.0</small></a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"> <span class="text-danger">${sessionScope.user.username}</span> 您好</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">我的信息</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="${pageContext.request.contextPath}/exitServlet">退出登录</a></li>
+                    <li role="separator" class="divider"></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--导航栏-->
+
+<!--页面中心内容-->
+<div class="container-fluid">
+
+    <div class="row">
+        <!--左半区-->
+        <div class="col-sm-2">
+
+            <!--菜单组件-->
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                用户管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item " href="">用户管理</a>
+                                <a class="list-group-item "href="">权限管理</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                需求管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item active" href="">需求征集</a>
+                                <a class="list-group-item" href="">需求管理</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                审核
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item" href="">形式审核</a>
+                                <a class="list-group-item" href="">部门审核</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                                统计查询
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item" href="">分类检索</a>
+                                <a class="list-group-item" href="">综合检索</a>
+                                <a class="list-group-item" href="">统计图表</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--左半区-->
+
+        <!--中间部分-->
+        <div id="content">
+            <!--页面中心内容-->
+            <div class="col-sm-10">
+
+                <!--中心内容-->
+                <!--标签页-->
+                <div >
+
+                        <div id="home">
+
+                            <form class="form-horizontal" role="form">
+                            <strong>请注意：其中带<span style="color: red">*</span>的为必填项</strong>
+                            <table class="table table-bordered">
+                                <tr class="text-center row">
+                                        <td class="col-sm-2">
+                                            <label class=" control-label " for="JGMC"><span style="color: red">*</span>机构全称</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            <input class="form-control" id="JGMC" type="text" placeholder="机构全称"/>
+                                        </td>
+
+                                        <td class="col-sm-2">
+                                            <label class="control-label" for="GKGLBM">归口管理部门</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            <select class="form-control " id="GKGLBM" >
+                                                <option></option>
+                                                <option value="">张家口</option>
+                                            </select>
+                                        </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="TXDZ"><span style="color: red">*</span>通讯地址</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="TXDZ" type="text" placeholder="通讯地址"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="SZDY"><span style="color: red">*</span>所在地域</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <select class="form-control" id="SZDY">
+                                            <option value="">石家庄</option>
+                                        </select>
+
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="DWWZ">网址</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="DWWZ" type="text" placeholder="单位网址"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="DZYX"><span style="color: red">*</span>电子信箱</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="DZYX" type="email" placeholder="电子信箱"/>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="FRDB"><span style="color: red">*</span>法人代表</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="FRDB" type="text" placeholder="法人代表"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="YZBM">邮政编码</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="YZBM" type="text" placeholder="邮政编码"/>
+
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="LXR"><span style="color: red">*</span>联 系 人</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="LXR" type="text" placeholder="联 系 人"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="GDDH">固定电话</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="GDDH" type="text" placeholder="固定电话"/>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="YDDH"><span style="color: red">*</span>手  机</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="YDDH" type="text" placeholder="移动电话"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="CZ">传真</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="CZ" type="text" placeholder="传真"/>
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="col-sm-2 text-center" >
+                                        <label class="control-label" for="JGSX1"><span style="color: red">*</span>机构属性</label>
+                                    </td>
+                                    <td colspan="3" >
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JGSX" id="JGSX1" value="企业"> 企业
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JGSX" id="JGSX2" value="高等院校"> 高等院校
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JGSX" id="JGSX3" value="研究机构"> 研究机构
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JGSX" id="JGSX4" value="其他"> 其他
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td >
+                                        <label class="control-label" for="JGJZ">
+                                            <span style="color: red">*</span>机构简介
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <textarea class="form-control" rows="8" id="JGJZ" placeholder="主要包括基本情况、现有研究基础等，限500字以内"></textarea>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2">
+                                        <label class=" control-label " for="JSXQMC"><span style="color: red">*</span>技术需求名称</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="form-control" id="JSXQMC" type="text" placeholder="技术需求名称"/>
+                                    </td>
+
+                                    <td class="col-sm-2">
+                                        <label class="control-label" for="JZXQNF"><span style="color: red">*</span>需求时限</label>
+                                    </td>
+                                    <td class="col-sm-4">
+                                        <input class="" id="QSXQNF" type="text" placeholder="起始年份"/>年
+                                        <br>
+                                        至
+                                        <br>
+                                        <input class="" id="JZXQNF" type="text" placeholder="截止年份"/>年
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td>
+                                        <label class="control-label" for="ZDKJXQGS1">
+                                            <span style="color: red">*</span><strong style="color: orangered">技术需求概述</strong>主要问题
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <textarea class="form-control" rows="8" id="ZDKJXQGS1" placeholder="需要解决的重大技术问题，限500字以内"></textarea>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td>
+                                        <label class="control-label" for="ZDKJXQGS2">
+                                            <span style="color: red">*</span><strong style="color: orangered">技术需求概述</strong>技术关键
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <textarea class="form-control" rows="8" id="ZDKJXQGS2" placeholder="所需的关键技术、主要指标，限500字以内"></textarea>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td>
+                                        <label class="control-label" for="ZDKJXQGS3">
+                                            <span style="color: red">*</span><strong style="color: orangered">技术需求概述</strong>预期目标
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <textarea class="form-control" rows="8" id="ZDKJXQGS3" placeholder="技术创新性、经济社会效益，限500字以内"></textarea>
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="text-center">
+                                        <label class="control-label" for="GJZ1">
+                                            <span style="color: red">*</span>关键字
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <input type="text" id="GJZ1">
+                                        <input type="text" id="GJZ2">
+                                        <input type="text" id="GJZ3">
+                                        <input type="text" id="GJZ4">
+                                        <input type="text" id="GJZ5">
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="text-center">
+                                        <label class="control-label" for="NTRZJE">
+                                            拟投入资金总额
+                                        </label>
+                                    </td>
+                                    <td colspan="2">
+                                        <input class="form-control" type="text" id="NTRZJE">
+                                    </td>
+                                    <td>
+                                        万元
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="col-sm-2 text-center" rowspan="2" >
+                                        <label class="control-label" for="CZ">
+                                            <span style="color: red">*</span>技术需求解决方式
+                                        </label>
+                                    </td>
+                                    <td colspan="3" >
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JSXQHZMS" id="JSXQHZMS1" value="独立研发"> 独立研发
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JSXQHZMS" id="JSXQHZMS2" value="委托研发"> 委托研发
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JSXQHZMS" id="JSXQHZMS3" value="合作研发"> 合作研发
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="JSXQHZMS" id="JSXQHZMS4" value="其他"> 其他
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="text-center">
+                                        合作意向单位
+                                    </td>
+                                    <td>
+                                        <input  class="form-control" name="QTJSMS" type="text">
+                                    </td>
+                                    <td>
+                                        (选填)
+                                    </td>
+                                </tr>
+                                <tr class=" row">
+                                    <td class="col-sm-2 text-center" >
+                                        <label class="control-label" for="YJLX1"><span style="color: red">*</span>机构属性</label>
+                                    </td>
+                                    <td colspan="3" >
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX1" value="基础研究"> 基础研究
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX2" value="应用研究"> 应用研究
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX3" value="试验发展"> 试验发展
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX4" value="研究与试验发展成果应用"> 研究与试验发展成果应用
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX5" value="技术推广与科技服务"> 技术推广与科技服务
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="YJLX" id="YJLX6" value="生产性活动"> 生产性活动
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2" rowspan="3">
+                                        <label class=" control-label " for="XKFL1"><span style="color: red">*</span>学科分类</label>
+                                    </td>
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XKFL1">
+                                            <option>1</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XKFL2">
+                                            <option>2</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XKFL3">
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="text-center">
+                                        <label for="XQJSSSLY">
+                                            <span style="color: red">*</span>需求技术所属领域
+                                        </label>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="XQJSSSLY" value="电子信息">
+                                                电子信息
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="光机电一体化">
+                                                光机电一体化
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="生物技术与制药">
+                                                生物技术与制药
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="新材料及应用">
+                                                新材料及应用
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="现代农业">
+                                                现代农业
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="新能源与高效节能">
+                                                新能源与高效节能
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="资源与环境">
+                                                资源与环境
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="高技术服务业">
+                                                高技术服务业
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="海洋">
+                                                海洋
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="社会公共事业">
+                                                社会公共事业
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="医疗卫生">
+                                                医疗卫生
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="其它">
+                                                其它
+                                            </label>
+                                        </div>
+                                        <div class="input-sm">
+                                            <input type="text"class="form-control" placeholder="如果选择其它，请填写">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="text-center row">
+                                    <td class="col-sm-2" rowspan="3">
+                                        <label class=" control-label " for="XQJSYYHY1"><span style="color: red">*</span>需求技术应用行业</label>
+                                    </td>
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XQJSYYHY1">
+                                            <option>1</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XQJSYYHY2">
+                                            <option>2</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td colspan="3" >
+                                        <select class="form-control" id="XQJSYYHY3">
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                                <div class="col-sm-2 col-sm-offset-5">
+                                    <input type="reset" class="btn btn-info" value="重置">
+                                </div>
+                                <div class="col-sm-2 ">
+                                 <input type="submit" class="btn btn-info" value="保存并提交">
+                                </div>
+                            </form>
+
+                        </div>
+
+
+                </div>
+                <!--中间部分-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--页面中心内容-->
+
+
+
+</body>
+</html>

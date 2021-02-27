@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/web/demand/addDemand.html" value="file://$PROJECT_DIR$/web/demand" />
+        <entry key="file://$PROJECT_DIR$/web/demand/addDemand.jsp" value="file://$PROJECT_DIR$/web/demand" />
+        <entry key="file://$PROJECT_DIR$/web/examine/xssh.html" value="file://$PROJECT_DIR$/web/examine" />
+        <entry key="file://$PROJECT_DIR$/web/examine/xssh.jsp" value="file://$PROJECT_DIR$/web/examine" />
+        <entry key="file://$PROJECT_DIR$/web/report/tjtb.jsp" value="file://$PROJECT_DIR$/web/report" />
+        <entry key="file://$PROJECT_DIR$/web/user/rolemange.html" value="file://$PROJECT_DIR$/web/user" />
+        <entry key="file://$PROJECT_DIR$/web/user/rolemange.jsp" value="file://$PROJECT_DIR$/web/user" />
+      </map>
+    </option>
+  </component>
+</project>

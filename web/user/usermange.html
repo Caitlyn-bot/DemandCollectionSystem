@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery-3.5.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+
+
+            $("#addUserBtn").click(function(){
+                $("#addUserModal").modal({
+                    show:true
+                });
+            })
+
+
+        });
+    </script>
+</head>
+<body>
+
+<!--导航栏-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重大需求征集系统 <small>V1.0</small></a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"> <span class="text-danger">${sessionScope.user.username}</span> 您好</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">我的信息</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="${pageContext.request.contextPath}/exitServlet">退出登录</a></li>
+                    <li role="separator" class="divider"></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--导航栏-->
+
+<!--页面中心内容-->
+<div class="container-fluid">
+
+    <div class="row">
+        <!--左半区-->
+        <div class="col-sm-2">
+
+            <!--菜单组件-->
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                用户管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item active" href="">用户管理</a>
+                                <a class="list-group-item"href="">权限管理</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                需求管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item" href="">需求征集</a>
+                                <a class="list-group-item" href="">需求管理</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                审核
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item" href="">形式审核</a>
+                                <a class="list-group-item" href="">部门审核</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                                统计查询
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <a class="list-group-item" href="">分类检索</a>
+                                <a class="list-group-item" href="">综合检索</a>
+                                <a class="list-group-item" href="">统计图表</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--左半区-->
+
+        <!--中间部分-->
+        <div id="content">
+            <!--页面中心内容-->
+            <div class="col-sm-10">
+
+                <!--中心内容-->
+                <!--标签页-->
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#home" aria-controls="home" role="tab"
+                               data-toggle="tab">用户列表</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="addUserBtn">添加用户</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <!--用户表格-->
+                            <table class="table table-bordered table-hover table-striped">
+                                <tr>
+                                    <th class="text-center">编号</th>
+                                    <th class="text-center">用户名</th>
+                                    <th class="text-center">机构全称</th>
+                                    <th class="text-center">真实姓名</th>
+                                    <th class="text-center">身份证号</th>
+                                    <th class="text-center">角色</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>1</td>
+                                    <td>夜月薇凉映银弩</td>
+                                    <td>石家庄铁道大学</td>
+                                    <td>张志伟</td>
+                                    <td>130727200109182439</td>
+                                    <td>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">请选择角色</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-primary btn-sm">查看用户</a>
+                                        <a data-toggle="modal" data-target="#updateUserModal" class="btn btn-info btn-sm">修改用户</a>
+                                        <a href="" class="btn btn-warning btn-sm">暂停用户</a>
+                                        <a href="" class="btn btn-success btn-sm">恢复用户</a>
+                                        <a href="" data-toggle="modal" data-target="#deleteUserModal" class="btn btn-danger btn-sm">删除用户</a>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+
+            </div>
+        </div>
+                </div>
+        <!--中间部分-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--页面中心内容-->
+
+<!--页面底部-->
+<footer class="footer navbar-fixed-bottom ">
+    <div class="container">
+        <!--分页工具栏-->
+        <div class=" text-center" >
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</footer>
+<!--页面底部-->
+            <!--添加用户的对话框-->
+            <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">添加用户信息</h4>
+                        </div>
+                            <form action="${pageContext.request.contextPath}/registerServlet" method="post">
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="username"><span style="color: red">*</span>用户名</label>
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="用户名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><span style="color: red">*</span>密码</label>
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="密码长度必须大于或等于六位">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rpassword"><span style="color: red">*</span>确认密码</label>
+                                    <input type="password" name="rpassword" class="form-control" id="rpassword" placeholder="再次输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="JGMC"><span style="color: red">*</span>机构全称</label>
+                                    <input type="password" name="JGMC" class="form-control" id="JGMC" placeholder="请输入机构的全称">
+                                </div>
+                                <div class="form-group">
+                                    <label for="realname"><span style="color: red">*</span>真实姓名</label>
+                                    <input type="password" name="realname" class="form-control" id="realname" placeholder="请输入真实的姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="SFZH"><span style="color: red">*</span>身份证号</label>
+                                    <input type="password" name="SFZH" class="form-control" id="SFZH" placeholder="请输入身份证号">
+                                </div>
+                                <div class="form-group">
+                                    <label for="YZBM">邮政编码</label>
+                                    <input type="password" name="YZBM" class="form-control" id="YZBM" placeholder="请输入邮政编码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="YDDH">移动电话</label>
+                                    <input type="password" name="YDDH" class="form-control" id="YDDH" placeholder="请输入移动电话">
+                                </div>
+                                其中带<span style="color: red">*</span>的为必填项
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">确认添加</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消添加</button>
+                        </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--编辑用户的对话框-->
+            <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">编辑用户信息</h4>
+                        </div>
+                        <form action="${pageContext.request.contextPath}/Servlet" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="username"><span style="color: red">*</span>用户名</label>
+                                    <input type="text" name="eusername" class="form-control" id="eusername" placeholder="用户名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><span style="color: red">*</span>密码</label>
+                                    <input type="password" name="epassword" class="form-control" id="epassword" placeholder="密码长度必须大于或等于六位">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="JGMC"><span style="color: red">*</span>机构全称</label>
+                                    <input type="password" name="eJGMC" class="form-control" id="eJGMC" placeholder="请输入机构的全称">
+                                </div>
+                                <div class="form-group">
+                                    <label for="realname"><span style="color: red">*</span>真实姓名</label>
+                                    <input type="password" name="erealname" class="form-control" id="erealname" placeholder="请输入真实的姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="SFZH"><span style="color: red">*</span>身份证号</label>
+                                    <input type="password" name="eSFZH" class="form-control" id="eSFZH" placeholder="请输入身份证号">
+                                </div>
+                                <div class="form-group">
+                                    <label for="YZBM">邮政编码</label>
+                                    <input type="password" name="eYZBM" class="form-control" id="eYZBM" placeholder="请输入邮政编码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="YDDH">移动电话</label>
+                                    <input type="password" name="eYDDH" class="form-control" id="eYDDH" placeholder="请输入移动电话">
+                                </div>
+                                其中带<span style="color: red">*</span>的为必填项
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">确认编辑</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消编辑</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--删除用户的对话框-->
+            <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center">删除</h4>
+                        </div>
+                            <div class="modal-body">
+                                您即将删除用户
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">确认删除</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消删除</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+</body>
+</html>
